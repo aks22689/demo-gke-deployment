@@ -1,0 +1,35 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "corner-demo"
+  namespace: "default"
+  labels:
+    app: "corner-demo"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "corner-demo"
+  template:
+    metadata:
+      labels:
+        app: "corner-demo"
+    spec:
+      containers:
+      - name: "hellospring-sha256-1"
+        image: "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring@sha256:837bbb7b29c06884647793a65ba0db07d1270bffbf739bb6a11f62218b20c8d6"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "corner-demo-hpa-besk"
+  namespace: "default"
+  labels:
+    app: "corner-demo"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "corner-demo"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
