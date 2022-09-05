@@ -26,7 +26,7 @@ steps:
     args:
     - run
     - --filename=demo-deployment.yaml
-    - --image=asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring@sha256:837bbb7b29c06884647793a65ba0db07d1270bffbf739bb6a11f62218b20c8d6
+    - --image=asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$SHORT_SHA
     - --location=asia-east1
     - --cluster=demo-gke-deployment
 # [END cloudbuild_maven]
