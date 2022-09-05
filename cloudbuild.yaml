@@ -14,40 +14,21 @@
 # [START cloudbuild_maven]
 # added
 steps:
-  # Adding timeout of 30mins
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args: ['-c', 'gcloud config set app/cloud_build_timeout 1800']
-    timeout: '1800s'
-  # Copy Maven dependencies to volume mavenrepo
-  - name: gcr.io/cloud-builders/gsutil
-    volumes:
-      - name: 'mavenrepo'
-        path: '/root/.m2'
-    args: ['cp', '-r', 'gs://demo-mavenrepo-artifacts', '/root/.m2']
   # Run the Maven build
   - name: maven:3-jdk-8
-    volumes:
-      - name: 'mavenrepo'
-        path: '/root/.m2'
     entrypoint: mvn
     args: ["test"]
+  # package the application  
   - name: maven:3-jdk-8
-    volumes:
-      - name: 'mavenrepo'
-        path: '/root/.m2'
     entrypoint: mvn
     args: ["package", "-Dmaven.test.skip=true"]
-  # Preserve the Maven dependencies into the bucket
-  - name: gcr.io/cloud-builders/gsutil
-    volumes:
-      - name: 'mavenrepo'
-        path: '/root/.m2'
-    args: ['cp', '-r', '/root/.m2', 'gs://demo-mavenrepo-artifacts']  
+  # Create the docker image   
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
+  # Push the docker image to artifact registery
   - name: gcr.io/cloud-builders/docker
     args: ["push", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA"]
+  # Deploy the docker image on GKE 
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - run
