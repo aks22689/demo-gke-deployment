@@ -24,10 +24,10 @@ steps:
     args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
 images: ["asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring"]
   - name: "gcr.io/cloud-builders/gke-deploy"
-  args:
-  - run
-  - --filename=demo-deployment.yaml
-  - --image=gcr.io/asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring@sha256:837bbb7b29c06884647793a65ba0db07d1270bffbf739bb6a11f62218b20c8d6
-  - --location=asia-east-1
-  - --cluster=demo-gke-deployment
+    args:
+    - run
+    - --filename=demo-deployment.yaml
+    - --image=gcr.io/asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring@sha256:837bbb7b29c06884647793a65ba0db07d1270bffbf739bb6a11f62218b20c8d6
+    - --location=asia-east-1
+    - --cluster=demo-gke-deployment
 # [END cloudbuild_maven]
