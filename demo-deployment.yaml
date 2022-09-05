@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: "hellospring-sha256-1"
-        image: "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring@sha256:837bbb7b29c06884647793a65ba0db07d1270bffbf739bb6a11f62218b20c8d6"
+        image: $image
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
