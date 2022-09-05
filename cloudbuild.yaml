@@ -21,12 +21,12 @@ steps:
     entrypoint: mvn
     args: ["package", "-Dmaven.test.skip=true"]
   - name: gcr.io/cloud-builders/docker
-    args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
+    args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - run
     - --filename=demo-deployment.yaml
-    - --image=asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$SHORT_SHA
+    - --image=asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA
     - --location=asia-east1
     - --cluster=demo-gke-deployment
 # [END cloudbuild_maven]
