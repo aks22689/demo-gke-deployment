@@ -17,7 +17,7 @@ steps:
   # Adding timeout of 30mins
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
-    args: ['-c', 'gcloud config set app/cloud_build_timeout 1800 ]
+    args: ['-c', 'gcloud config set app/cloud_build_timeout 1800']
     timeout: '1800s'
   # Copy Maven dependencies to volume mavenrepo
   - name: gcr.io/cloud-builders/gsutil
