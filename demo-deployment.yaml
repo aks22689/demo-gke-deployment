@@ -6,7 +6,7 @@ metadata:
   labels:
     app: "corner-demo"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: "corner-demo"
@@ -32,4 +32,4 @@ spec:
     name: "corner-demo"
     apiVersion: "apps/v1"
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 1
