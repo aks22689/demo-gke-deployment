@@ -22,7 +22,8 @@ steps:
     args: ["package", "-Dmaven.test.skip=true"]
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
-  images: [“asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA”]
+  - name: gcr.io/cloud-builders/docker
+    args: ["push", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA"]
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - run
