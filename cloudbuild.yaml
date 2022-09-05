@@ -14,12 +14,31 @@
 # [START cloudbuild_maven]
 # added
 steps:
+  # Copy Maven dependencies to volume mavenrepo
+  - name: gcr.io/cloud-builders/gsutil
+    volumes:
+      - name: 'mavenrepo'
+        path: '/root/.m2'
+    args: ['cp', '-r', 'gs://demo-mavenrepo-artifacts', '/root/.m2']
+  # Run the Maven build
   - name: maven:3-jdk-8
+    volumes:
+      - name: 'mavenrepo'
+        path: '/root/.m2'
     entrypoint: mvn
     args: ["test"]
   - name: maven:3-jdk-8
+    volumes:
+      - name: 'mavenrepo'
+        path: '/root/.m2'
     entrypoint: mvn
     args: ["package", "-Dmaven.test.skip=true"]
+  # Preserve the Maven dependencies into the bucket
+  - name: gcr.io/cloud-builders/gsutil
+    volumes:
+      - name: 'mavenrepo'
+        path: '/root/.m2'
+    args: ['cp', '-r', '/root/.m2', 'gs://demo-mavenrepo-artifacts']  
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
   - name: gcr.io/cloud-builders/docker
