@@ -19,7 +19,17 @@ steps:
     entrypoint: mvn
     args: ["test"]
   - name: 'bash'
-    args: ['echo', 'test']  
+    args: ['echo', 'Running Apriori MAT test -- TODO']
+  - name: 'bash'
+    args: ['echo', 'Running Sonar Scan -- TODO']
+  - name: 'bash'
+    args: ['echo', 'Parsing Sonar Result -- TODO']
+  - name: 'bash'
+    args: ['echo', 'Building Sonar report -- TODO']
+  - name: 'bash'
+    args: ['echo', 'Emailing Sonar report -- TODO']
+  - name: 'bash'
+    args: ['echo', 'Emailing Sonar report -- TODO']  
   # package the application  
   - name: maven:3-jdk-8
     entrypoint: mvn
@@ -27,7 +37,11 @@ steps:
   # Create the docker image   
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
-  # Push the docker image to artifact registery
+  - name: 'bash'
+    args: ['echo', 'Twistcli Image Scan -- TODO'] 
+  - name: 'bash'
+    args: ['echo', 'Parsing Twistcli Scan results -- TODO']   
+    # Push the docker image to artifact registery
   - name: gcr.io/cloud-builders/docker
     args: ["push", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA"]
   # Deploy the docker image on GKE 
@@ -38,4 +52,17 @@ steps:
     - --image=asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA
     - --location=asia-east1
     - --cluster=demo-gke-deployment
+  - name: 'bash'
+    args: ['echo', 'Trigger MLP Dev Deployment'] 
+  - name: 'bash'
+    args: ['echo', 'Aposteriori Mat Test'] 
+  - name: 'bash'
+    args: ['echo', 'Gatling Load/Scalability Test']
+  - name: 'bash'
+    args: ['echo', 'Update Result'] 
+  - name: 'bash'
+    args: ['echo', 'Cleaning Temporary files']   
+    
+    
+    
 # [END cloudbuild_maven]
