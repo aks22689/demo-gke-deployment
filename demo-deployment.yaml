@@ -18,6 +18,15 @@ spec:
       containers:
       - name: "hellospring"
         image: asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring
+        resources:
+          limits:
+            cpu: 200m
+            ephemeral-storage: 10Mi
+            memory: 20Mi
+          requests:
+            cpu: 50m
+            ephemeral-storage: 10Mi
+            memory: 20Mi
 ---
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
