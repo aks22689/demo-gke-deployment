@@ -16,7 +16,7 @@ spec:
         app: "corner-demo"
     spec:
       containers:
-      - name: "hellospring-sha256-1"
+      - name: "hellospring"
         image: asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring
 ---
 apiVersion: "autoscaling/v2beta1"
