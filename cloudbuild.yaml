@@ -14,7 +14,7 @@
 # [START cloudbuild_maven]
 # added
 steps:
-  # Run the Maven build
+  # Run the Maven build for testing
   - name: maven:3-jdk-8
     entrypoint: mvn
     args: ["test"]
