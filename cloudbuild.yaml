@@ -18,21 +18,9 @@ steps:
   - name: maven:3-jdk-8
     entrypoint: mvn
     args: ["test"]
-  # Apriori Mat Test  
-  - name: 'bash'
-    args: ['echo', 'Running Apriori MAT test -- TODO']
   # Run Sonar Scan
   - name: 'bash'
     args: ['echo', 'Running Sonar Scan -- TODO']
-  # Sonar scan result parsing  
-  - name: 'bash'
-    args: ['echo', 'Parsing Sonar Result -- TODO']
-  # Builing Sonar Report  
-  - name: 'bash'
-    args: ['echo', 'Building Sonar report -- TODO']
-  # Emailing Sonar report  
-  - name: 'bash'
-    args: ['echo', 'Emailing Sonar report -- TODO']
   # package the application  
   - name: maven:3-jdk-8
     entrypoint: mvn
@@ -40,12 +28,6 @@ steps:
   # Create the docker image   
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
-  # Twistcli Image Scan
-  - name: 'bash'
-    args: ['echo', 'Twistcli Image Scan -- TODO'] 
-  # Parsing Twistcli scan  
-  - name: 'bash'
-    args: ['echo', 'Parsing Twistcli Scan results -- TODO']   
   # Push the docker image to artifact registery
   - name: gcr.io/cloud-builders/docker
     args: ["push", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA"]
@@ -56,23 +38,5 @@ steps:
     - --filename=demo-deployment.yaml
     - --image=asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA
     - --location=asia-east1
-    - --cluster=demo-gke-deployment
-  # MLP Dev Deployment  
-  - name: 'bash'
-    args: ['echo', 'Trigger MLP Dev Deployment'] 
-  # Aposteriori Mat Test  
-  - name: 'bash'
-    args: ['echo', 'Aposteriori Mat Test'] 
-  # Gatling Load/Scalability Test  
-  - name: 'bash'
-    args: ['echo', 'Gatling Load/Scalability Test']
-  # Updatte Result  
-  - name: 'bash'
-    args: ['echo', 'Update Result'] 
-  # Cleaning Temporary files  
-  - name: 'bash'
-    args: ['echo', 'Cleaning Temporary files']   
-    
-    
-    
+    - --cluster=demo-gke-deployment  
 # [END cloudbuild_maven]
