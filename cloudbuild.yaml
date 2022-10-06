@@ -24,7 +24,7 @@ steps:
   # package the application  
   - name: maven:3-jdk-8
     entrypoint: mvn
-    args: ["package", "-Dmaven.test.skip=true"]
+    args: ["package1", "-Dmaven.test.skip=true"]
   # Create the docker image   
   - name: gcr.io/cloud-builders/docker
     args: ["build", "-t", "asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring:$COMMIT_SHA", "--build-arg=JAR_FILE=target/hello-spring-1.0.0.jar", "."]
