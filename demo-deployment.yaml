@@ -2,7 +2,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "corner-demo"
-  namespace: "default"
+  namespace: "samplea-app"
   labels:
     app: "corner-demo"
 spec:
@@ -32,7 +32,7 @@ apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "corner-demo-hpa-besk"
-  namespace: "default"
+  namespace: "sample-app"
   labels:
     app: "corner-demo"
 spec:
