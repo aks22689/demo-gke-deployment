@@ -2,7 +2,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "corner-demo"
-  namespace: "samplea-app"
+  namespace: "sample-app"
   labels:
     app: "corner-demo"
 spec:
