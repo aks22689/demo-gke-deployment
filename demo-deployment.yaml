@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: "hellospring"
-        image: asia-docker.pkg.dev/hopeful-ally-360404/test/hellospring
+        image: busybox
         resources:
           limits:
             cpu: 200m
